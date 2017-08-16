@@ -1,1 +1,1 @@
-include 'gitlab-custom'
+include_recipe 'gitlab-custom'
