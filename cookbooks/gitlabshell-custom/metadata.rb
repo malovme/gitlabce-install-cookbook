@@ -1,6 +1,6 @@
 name 'gitlabshell-custom'
-maintainer 'The Authors'
-maintainer_email 'you@example.com'
+maintainer 'Michael Malov'
+maintainer_email 'mmalov@engineyard.com'
 license 'All Rights Reserved'
 description 'Installs/Configures gitlabshell-custom'
 long_description 'Installs/Configures gitlabshell-custom'
