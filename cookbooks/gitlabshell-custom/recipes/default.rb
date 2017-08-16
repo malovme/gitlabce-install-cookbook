@@ -15,7 +15,7 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
         Dir.entries(failed_path).select {|entry| File.directory? File.join(failed_path, entry) and !(entry =='.' || entry == '..') }.sort.last
   end
 
-  execute 'bundle exec rake gitlab:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
+  execute 'sudo -u deploy bundle exec rake gitlab:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
     cwd release_dir
   end
 end
