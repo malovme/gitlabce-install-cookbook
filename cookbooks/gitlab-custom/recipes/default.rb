@@ -4,7 +4,7 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 %w[ /home/git /home/git/repositories].each do |path|
-  directory '' do
+  directory path do
     owner 'deploy'
     group 'deploy'
     mode '0755'
