@@ -10,7 +10,8 @@ failed_path = "/data/gitlabce/releases_failed"
 if File.exist?(current_path)
   release_dir = current_path
 else
-  release_dir =  Dir.entries(failed_path).select {|entry| File.directory? File.join(failed_path, entry) and !(entry =='.' || entry == '..') }.last
+  release_dir = failed_path + '/' +
+      Dir.entries(failed_path).select {|entry| File.directory? File.join(failed_path, entry) and !(entry =='.' || entry == '..') }.sort.last
 end
 
 execute 'bundle exec rake gitlab:shell:install REDIS_URL=unix:/var/run/redis/redis.sock RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
