@@ -1,7 +1,7 @@
 name 'ey-custom'
 
+depends "custom-redis"
 depends 'gitlab-custom'
-depends 'gitlabshell-custom'
 depends 'gitlabdb-custom'
 #depends 'envyable-custom'
-depends "custom-redis"
+depends 'gitlabshell-custom'

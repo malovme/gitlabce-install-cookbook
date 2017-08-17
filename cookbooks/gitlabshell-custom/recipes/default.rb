@@ -32,7 +32,10 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
     end
   end
 
-  execute 'sudo -u deploy bundle exec rake gitlab:shell:install RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
+  redis_conf = YAML.load_file('/data/gitlabce/shared/config/redis.yml')
+  redis_url = redis_conf['production']['host'] + ':' + redis_conf['production']['port'].to_s
+
+  execute "sudo -u deploy bundle exec rake gitlab:shell:install REDIS_URL=redis://#{redis_url} RAILS_ENV=production SKIP_STORAGE_VALIDATION=true" do
     cwd release_dir
   end
 end
