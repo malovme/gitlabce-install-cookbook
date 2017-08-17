@@ -22,11 +22,8 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
     end
   end
   unless File.exist?(gitlabshell_secret_path)
-    file gitlabshell_secret_path do
-      content SecureRandom.hex(16)
-      owner 'deploy'
-      group 'deploy'
-      mode '0755'
+    File.open(gitlabshell_secret_path, "w") do |f|
+      f.write(SecureRandom.hex(16))
     end
   end
 
