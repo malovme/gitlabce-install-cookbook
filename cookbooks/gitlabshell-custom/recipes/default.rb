@@ -15,10 +15,6 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
         Dir.entries(failed_path).select {|entry| File.directory? File.join(failed_path, entry) and !(entry =='.' || entry == '..') }.sort.last
   end
 
-  execute 'sudo -u deploy bundle exec rake gitlab:shell:install RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
-    cwd release_dir
-  end
-
   gitlabshell_secret_path = '/home/git/gitlab-shell/.gitlab_shell_secret'
   if File.exist?(gitlabshell_secret_path) && File.symlink?(gitlabshell_secret_path)
     file gitlabshell_secret_path do
@@ -32,5 +28,9 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
       group 'deploy'
       mode '0755'
     end
+  end
+
+  execute 'sudo -u deploy bundle exec rake gitlab:shell:install RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
+    cwd release_dir
   end
 end
