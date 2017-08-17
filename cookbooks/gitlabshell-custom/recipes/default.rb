@@ -25,6 +25,11 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
     File.open(gitlabshell_secret_path, "w") do |f|
       f.write(SecureRandom.hex(16))
     end
+    file gitlabshell_secret_path do
+      owner 'deploy'
+      group 'deploy'
+      mode '0755'
+    end
   end
 
   execute 'sudo -u deploy bundle exec rake gitlab:shell:install RAILS_ENV=production SKIP_STORAGE_VALIDATION=true' do
