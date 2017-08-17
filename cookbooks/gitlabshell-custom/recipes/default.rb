@@ -16,20 +16,9 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
   end
 
   gitlabshell_secret_path = '/home/git/gitlab-shell/.gitlab_shell_secret'
-  if File.exist?(gitlabshell_secret_path) && File.symlink?(gitlabshell_secret_path)
-    file gitlabshell_secret_path do
-      action :delete
-    end
-  end
-  unless File.exist?(gitlabshell_secret_path)
-    File.open(gitlabshell_secret_path, "w") do |f|
-      f.write(SecureRandom.hex(16))
-    end
-    file gitlabshell_secret_path do
-      owner 'deploy'
-      group 'deploy'
-      mode '0755'
-    end
+
+  file gitlabshell_secret_path do
+    action :delete
   end
 
   redis_conf = YAML.load_file('/data/gitlabce/shared/config/redis.yml')
@@ -37,5 +26,9 @@ if %w[util app app_master].include?(node['dna']['instance_role'])
 
   execute "sudo -u deploy bundle exec rake gitlab:shell:install REDIS_URL=redis://#{redis_url} RAILS_ENV=production SKIP_STORAGE_VALIDATION=true" do
     cwd release_dir
+  end
+
+  execute "sudo -u deploy ./gitlab-shell" do
+    cwd '/home/git/gitlab-shell/bin/'
   end
 end
