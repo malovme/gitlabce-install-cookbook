@@ -3,11 +3,17 @@
 # Recipe:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
-%w[ /home/git /home/git/repositories].each do |path|
-  directory path do
-    owner 'deploy'
-    group 'deploy'
-    mode '0755'
-    action :create
-  end
+
+directory '/home/git' do
+  owner 'deploy'
+  group 'deploy'
+  mode '0755'
+  action :create
+end
+
+directory '/home/git/repositories' do
+  owner 'deploy'
+  group 'deploy'
+  mode '2770'
+  action :create
 end
