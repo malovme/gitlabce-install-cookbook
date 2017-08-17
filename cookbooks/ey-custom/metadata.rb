@@ -4,3 +4,4 @@ depends 'gitlab-custom'
 depends 'gitlabshell-custom'
 depends 'gitlabdb-custom'
 #depends 'envyable-custom'
+depends "custom-redis"
