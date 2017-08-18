@@ -3,7 +3,7 @@
 # Recipe:: default
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
-if %w[util app app_master].include?(node['dna']['instance_role'])
+if %w[app app_master].include?(node['dna']['instance_role'])
   directory '/home/git/gitlab-workhorse' do
     recursive true
     action :delete

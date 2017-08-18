@@ -4,7 +4,7 @@
 #
 # Copyright:: 2017, The Authors, All Rights Reserved.
 
-if %w[util app app_master].include?(node['dna']['instance_role'])
+if %w[app app_master].include?(node['dna']['instance_role'])
   gitlabshell_secret_path = '/home/git/gitlab-shell/.gitlab_shell_secret'
 
   file gitlabshell_secret_path do
